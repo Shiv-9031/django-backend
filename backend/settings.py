@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,16 +78,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Online Shop',
         'USER':'postgres',
-        'PASSWORD':"Shiv@9031",
+        'PASSWORD':os.environ.get('DB_PASSWORD'),
         'HOST' :'127.0.0.1',
         'PORT':5432
     }
-}
+} 
 
 
 # Password validation
@@ -129,10 +133,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Email notification
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST ='smtp.gmail.com'
+EMAIL_BACKEND=os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST =os.environ.get('EMAIL_HOST')
 EMAIL_PORT=587
-EMAIL_HOST_USER='shivkumar.askn@gmail.com'
-EMAIL_HOST_PASSWORD ='dbmwawcmrlemhgyw'
+EMAIL_HOST_USER= os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD =os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAL_USE_SSL = False
